@@ -1,0 +1,7 @@
+# Documents de cours et d'exercice conserves localement, hors du depot
+*.pdf
+
+# Fichiers produits par build_dll.bat
+*.exe
+*.dll
+*.a
