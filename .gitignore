@@ -5,3 +5,6 @@
 *.exe
 *.dll
 *.a
+
+# Rapport conserve localement, hors du depot GitHub
+Rapport_Piles_Generiques_DLL.tex
