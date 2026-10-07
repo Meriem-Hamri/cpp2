@@ -1,0 +1,6 @@
+bonjour ceci est un fichier de test
+nous travaillons sur un algorithme de recherche
+le programme doit trouver un mot entier dans ce fichier
+computer cote programmation ordinateur clavier souris ecran
+recherche vecteur complexite execution fichier texte
+maison voiture universite logiciel developpement reseau base donnees
