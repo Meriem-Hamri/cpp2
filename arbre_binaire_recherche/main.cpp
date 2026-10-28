@@ -1,4 +1,5 @@
 #include <chrono>   // Permet de mesurer la duree des operations.
+#include <iomanip>  // Permet de limiter le nombre de decimales affichees.
 #include <iostream> // Permet d'afficher les resultats dans la console.
 #include <string>   // Permet de construire les branches de l'arbre a afficher.
 
@@ -8,6 +9,23 @@ struct Noeud {
     Noeud* gauche;  // Enfant qui contient une valeur plus petite.
     Noeud* droite;  // Enfant qui contient une valeur plus grande.
 };
+
+// Choisit automatiquement l'unite de temps la plus facile a lire.
+void afficherDuree(long long nanosecondes) {
+    if (nanosecondes < 1000) {
+        std::cout << nanosecondes << " ns";
+    } else if (nanosecondes < 1000000) {
+        std::cout << std::fixed << std::setprecision(3)
+                  << nanosecondes / 1000.0 << " us";
+    } else if (nanosecondes < 1000000000) {
+        std::cout << std::fixed << std::setprecision(3)
+                  << nanosecondes / 1000000.0 << " ms";
+    } else {
+        std::cout << std::fixed << std::setprecision(3)
+                  << nanosecondes / 1000000000.0 << " s";
+    }
+    std::cout << std::defaultfloat;
+}
 
 // Insere une valeur et renvoie la racine, qui peut changer si l'arbre etait vide.
 Noeud* inserer(Noeud* racine, int valeur) {
@@ -127,7 +145,7 @@ void afficherArbre(const Noeud* racine, int limite) {
 
 int main() {
     Noeud* racine = nullptr; // Au debut, l'arbre est vide.
-    const int nombreValeurs = 32757; // Changer ce nombre pour essayer une autre taille.
+    const int nombreValeurs = 1000; // Changer ce nombre pour essayer une autre taille.
     const int limiteAffichage = 20; // Ne pas remplir le terminal avec tout l'arbre.
 
     // On prend l'heure avant la premiere insertion.
@@ -156,12 +174,16 @@ int main() {
     // Dans cet ordre, l'arbre penche a droite et sa hauteur vaut nombreValeurs.
     std::cout << "Insertion de 1 a " << nombreValeurs << '\n';
     std::cout << "Hauteur (nombre de niveaux) : " << hauteur(racine) << '\n';
-    std::cout << "Temps total d'insertion : " << tempsInsertion << " ns\n";
+    std::cout << "Temps total d'insertion : ";
+    afficherDuree(tempsInsertion);
+    std::cout << '\n';
 
     // La recherche de la derniere valeur traverse tous les noeuds.
     std::cout << "Recherche de " << nombreValeurs << " : "
               << (trouve ? "trouve" : "absent") << '\n';
-    std::cout << "Temps de recherche : " << tempsRecherche << " ns\n";
+    std::cout << "Temps de recherche : ";
+    afficherDuree(tempsRecherche);
+    std::cout << '\n';
 
     // On ne montre que les premieres lignes de l'arbre.
     std::cout << "\nPremiers noeuds de l'arbre :\n";
